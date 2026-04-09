@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMU Configurator</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+
+    <!-- Inter font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- JSZip for ZIP downloads -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+</head>
+<body>
+    <div id="app">
+
+        <!-- ── Header ──────────────────────────────────────────── -->
+        <header class="header">
+            <div class="logo">
+                <h1>EMU Configurator</h1>
+                <span class="subtitle">Expandable Multi-material Unit</span>
+            </div>
+            <div class="header-links">
+                <a href="https://github.com/DW-Tas/EMU" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://discord.gg/hG2NRazKG3" target="_blank" rel="noopener">Discord</a>
+            </div>
+        </header>
+
+        <!-- ── Main ────────────────────────────────────────────── -->
+        <main class="main-content">
+
+            <!-- Config panel (left) -->
+            <aside class="config-panel">
+                <div class="config-panel-content">
+                    <h2>Configuration</h2>
+
+                    <!-- Auto-generated config sections injected here -->
+                    <div id="config-sections"></div>
+
+                    <!-- Actions -->
+                    <section class="config-section actions-section">
+                        <button class="btn-download" id="download-stls">Download STLs</button>
+                        <button class="btn-copy-url" id="share-config">Share Configuration</button>
+                        <button class="btn-reset" id="reset-config">Reset to Defaults</button>
+                    </section>
+                </div>
+            </aside>
+
+            <!-- Parts manifest (right) -->
+            <section class="manifest-panel">
+                <div class="manifest-panel-content">
+                    <h2>Parts Manifest</h2>
+                    <div id="print-list"></div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>
