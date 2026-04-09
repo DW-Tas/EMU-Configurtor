@@ -390,20 +390,41 @@ body {
 }
 
 .part-file-entry {
-    padding: 0.25rem 0 0.25rem 0.5rem;
+    padding: 0.35rem 0.5rem;
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
     gap: 0.5rem;
+    border-radius: 3px;
+}
+.part-file-entry:nth-child(odd) {
+    background: rgba(255, 255, 255, 0.02);
+}
+.part-file-entry:nth-child(even) {
+    background: rgba(255, 255, 255, 0.05);
 }
 .part-file {
     flex: 1;
     color: var(--text-secondary);
     font-size: 0.75rem;
     display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    min-width: 0;
+}
+.part-file .part-name-row {
+    display: flex;
     align-items: center;
     gap: 0.35rem;
-    min-width: 0;
+}
+.part-filename {
+    color: var(--text-muted);
+    font-size: 0.65rem;
+    font-family: monospace;
+    padding-left: 1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .part-qty {
     color: var(--text-muted);

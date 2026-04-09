@@ -1089,6 +1089,7 @@ export const partsManifest = {
             qty: 1,
             colorCategory: "default",
             printProfile: "structural",
+            requires: { syncType: "standard" },
         },
         "tool-ptfe-cutter": {
             name: "PTFE Cutter and Length Tool",

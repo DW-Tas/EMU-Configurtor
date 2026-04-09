@@ -66,19 +66,18 @@ function buildPartRow(part) {
     const li = document.createElement('li');
     li.className = 'part-file-entry';
 
-    // Name with colour dot
+    // Name with colour dot + filename
     const nameSpan = document.createElement('span');
     nameSpan.className = 'part-file';
-    nameSpan.innerHTML = `${colorDot(part.colorCategory)} ${esc(part.name)}`;
+    const nameRow = `<span class="part-name-row">${colorDot(part.colorCategory)} ${esc(part.name)}</span>`;
+    const filename = stlFilename(part);
+    const fileRow = filename ? `<span class="part-filename">${esc(filename)}</span>` : '';
+    nameSpan.innerHTML = nameRow + fileRow;
 
     // Quantity
     const qtySpan = document.createElement('span');
     qtySpan.className = 'part-qty';
-    if (part.perFile && part.perFile > 1 && part.resolvedPrintQty !== part.resolvedQty) {
-        qtySpan.textContent = `×${part.resolvedQty} (${part.resolvedPrintQty} prints)`;
-    } else {
-        qtySpan.textContent = `×${part.resolvedQty}`;
-    }
+    qtySpan.textContent = `×${part.resolvedQty}`;
 
     // STL link
     const linkSpan = document.createElement('span');
