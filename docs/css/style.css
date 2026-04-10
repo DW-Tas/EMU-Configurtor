@@ -5,10 +5,10 @@
 
 :root {
     /* Backgrounds */
-    --bg-primary:   #0a0c10;
-    --bg-secondary: #0f1318;
-    --bg-panel:     #1c2128;
-    --bg-tertiary:  #161b22;
+    --bg-primary:   #13161c;
+    --bg-secondary: #181c24;
+    --bg-panel:     #232a34;
+    --bg-tertiary:  #1c222b;
 
     /* Accents */
     --accent:       #4a6fa5;
@@ -379,7 +379,7 @@ body {
 
 /* ── Category headers ─────────────────────────────────────────── */
 .part-category-header {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     font-weight: 600;
     color: var(--text-primary);
     padding: 0.5rem 0 0.2rem;
@@ -408,16 +408,16 @@ body {
     border-radius: 3px;
 }
 .part-file-entry:nth-child(odd) {
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(255, 255, 255, 0.03);
 }
 .part-file-entry:nth-child(even) {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.07);
 }
 
 .part-file {
     flex: 1;
     min-width: 0;
-    color: var(--text-secondary);
+    color: var(--text-primary);
     font-size: 0.8rem;
     display: flex;
     flex-direction: column;
@@ -429,7 +429,7 @@ body {
     gap: 0.35rem;
 }
 .part-filename {
-    color: var(--text-muted);
+    color: var(--text-secondary);
     font-size: 0.7rem;
     font-family: monospace;
     padding-left: 1rem;
@@ -440,7 +440,7 @@ body {
 .part-qty {
     width: 5rem;
     text-align: right;
-    color: var(--text-muted);
+    color: var(--text-secondary);
     font-size: 0.85rem;
     white-space: nowrap;
 }
