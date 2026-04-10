@@ -7,6 +7,7 @@
  */
 
 import { partsManifest } from './partsManifest.js';
+import { stlUrl, stlFilename } from './stlHelpers.js';
 
 // ────────────────────────────────────────────────────────────────────
 //  Public API
@@ -83,20 +84,7 @@ export async function downloadStls(activeParts, onProgress) {
 //  Helpers
 // ────────────────────────────────────────────────────────────────────
 
-function stlUrl(part) {
-    if (part.externalUrl) return part.externalUrl;
-    // Encode each path segment individually to handle spaces & brackets
-    const encoded = part.stlPath
-        .split('/')
-        .map(seg => encodeURIComponent(seg))
-        .join('/');
-    return partsManifest.stlBaseUrl + encoded;
-}
 
-function stlFilename(part) {
-    const raw = part.externalUrl || part.stlPath || '';
-    return decodeURIComponent(raw.split('/').pop());
-}
 
 /** Remove characters that are invalid in ZIP folder names. */
 function sanitiseFolder(name) {

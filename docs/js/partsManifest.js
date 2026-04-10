@@ -36,6 +36,11 @@
  * PER-FILE COUNT:
  *   perFile: N — indicates the STL produces N items per print.
  *   The print list will display both total items and number of prints.
+ *
+ * INTERNAL FLAGS:
+ *   _combinerPorts: N — marks a part as a combiner with N input ports.
+ *   These parts are excluded from normal condition matching and are
+ *   instead auto-calculated by configEngine based on lane count.
  */
 
 export const partsManifest = {
@@ -667,7 +672,6 @@ export const partsManifest = {
             colorCategory: "translucent",
             printProfile: "base",
             requires: { pcbMultiLed: true, buttonStyle: "mmu" },
-            notes: "STEP file — may need conversion to STL for printing",
         },
 
         // ═══════════════════════════════════════

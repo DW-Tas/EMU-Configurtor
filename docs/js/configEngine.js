@@ -232,7 +232,7 @@ function notifyListeners() {
 function generateUI() {
     const container = document.getElementById('config-sections');
     if (!container) return;
-    container.innerHTML = '';
+    container.replaceChildren();
 
     for (const section of partsManifest.configSections) {
         const el = document.createElement('section');
@@ -377,6 +377,7 @@ function buildNumberInput(id, opt, wrap) {
     btnMinus.className = 'number-btn';
     btnMinus.textContent = '−';
     btnMinus.type = 'button';
+    btnMinus.setAttribute('aria-label', 'Decrease ' + opt.label);
 
     const input = document.createElement('input');
     input.type = 'number';
@@ -391,6 +392,7 @@ function buildNumberInput(id, opt, wrap) {
     btnPlus.className = 'number-btn';
     btnPlus.textContent = '+';
     btnPlus.type = 'button';
+    btnPlus.setAttribute('aria-label', 'Increase ' + opt.label);
 
     const update = (v) => {
         const clamped = Math.max(opt.min, Math.min(opt.max, v));
@@ -493,19 +495,43 @@ function evaluateCondition(cond) {
 //  URL hash & session persistence
 // ────────────────────────────────────────────────────────────────────
 
+/** Validate a value against its config option definition. */
+function isValidConfigValue(key, value) {
+    const opt = partsManifest.configOptions[key];
+    if (!opt) return false;
+    switch (opt.type) {
+        case 'radio':
+            return opt.options.some(o => o.value === value);
+        case 'checkbox':
+            return typeof value === 'boolean';
+        case 'number':
+            return typeof value === 'number' && value >= opt.min && value <= opt.max;
+        case 'color':
+            return typeof value === 'string' && /^#[0-9a-f]{6}$/i.test(value);
+        default:
+            return false;
+    }
+}
+
+/** Apply validated values from a plain object onto state.config. */
+function applyValidatedConfig(source) {
+    let applied = false;
+    for (const key of Object.keys(source)) {
+        if (key in partsManifest.configOptions && isValidConfigValue(key, source[key])) {
+            state.config[key] = source[key];
+            applied = true;
+        }
+    }
+    return applied;
+}
+
 function loadStateFromHash() {
     const hash = window.location.hash.slice(1);
     if (!hash) return false;
     try {
         const decoded = JSON.parse(atob(hash));
         if (decoded && decoded.config) {
-            // Only accept known keys
-            for (const key of Object.keys(decoded.config)) {
-                if (key in partsManifest.configOptions) {
-                    state.config[key] = decoded.config[key];
-                }
-            }
-            return true;
+            return applyValidatedConfig(decoded.config);
         }
     } catch {
         console.warn('Invalid configuration URL — using defaults');
@@ -519,12 +545,7 @@ function loadStateFromSession() {
         if (!raw) return false;
         const parsed = JSON.parse(raw);
         if (parsed) {
-            for (const key of Object.keys(parsed)) {
-                if (key in partsManifest.configOptions) {
-                    state.config[key] = parsed[key];
-                }
-            }
-            return true;
+            return applyValidatedConfig(parsed);
         }
     } catch { /* ignored */ }
     return false;

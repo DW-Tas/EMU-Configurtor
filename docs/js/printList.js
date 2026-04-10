@@ -7,6 +7,7 @@
  */
 
 import { partsManifest } from './partsManifest.js';
+import { stlUrl, stlFilename } from './stlHelpers.js';
 
 let containerEl = null;
 
@@ -20,11 +21,13 @@ export function init(container) {
 
 export function update(activeParts) {
     if (!containerEl) return;
-    containerEl.innerHTML = '';
+    containerEl.replaceChildren();
 
     if (activeParts.length === 0) {
-        containerEl.innerHTML =
-            '<p class="section-note">No parts match the current configuration.</p>';
+        const empty = document.createElement('p');
+        empty.className = 'section-note';
+        empty.textContent = 'No parts match the current configuration.';
+        containerEl.appendChild(empty);
         return;
     }
 
@@ -36,6 +39,7 @@ export function update(activeParts) {
         groups.get(cat).push(part);
     }
 
+    // Build table
     // Build list
     const list = document.createElement('ul');
     list.className = 'parts-list';
@@ -44,7 +48,7 @@ export function update(activeParts) {
         // Category header
         const header = document.createElement('li');
         header.className = 'part-category-header';
-        header.innerHTML = `<span class="part-name">${esc(category)}</span>`;
+        header.textContent = category;
         list.appendChild(header);
 
         for (const part of parts) {
@@ -66,7 +70,7 @@ function buildPartRow(part) {
     const li = document.createElement('li');
     li.className = 'part-file-entry';
 
-    // Name with colour dot + filename
+    // Name span with colour dot + filename
     const nameSpan = document.createElement('span');
     nameSpan.className = 'part-file';
     const nameRow = `<span class="part-name-row">${colorDot(part.colorCategory)} ${esc(part.name)}</span>`;
@@ -74,12 +78,12 @@ function buildPartRow(part) {
     const fileRow = filename ? `<span class="part-filename">${esc(filename)}</span>` : '';
     nameSpan.innerHTML = nameRow + fileRow;
 
-    // Quantity
+    // Quantity span
     const qtySpan = document.createElement('span');
     qtySpan.className = 'part-qty';
     qtySpan.textContent = `×${part.resolvedQty}`;
 
-    // STL link
+    // STL link span
     const linkSpan = document.createElement('span');
     linkSpan.className = 'part-stl-link';
     const url = stlUrl(part);
@@ -88,7 +92,7 @@ function buildPartRow(part) {
         a.href = url;
         a.target = '_blank';
         a.rel = 'noopener';
-        a.textContent = 'STL ↗';
+        a.textContent = fileExtLabel(part) + ' ↗';
         a.title = stlFilename(part);
         linkSpan.appendChild(a);
     }
@@ -97,7 +101,7 @@ function buildPartRow(part) {
     li.appendChild(qtySpan);
     li.appendChild(linkSpan);
 
-    // Optional note
+    // Notes as a div inside the same li (wraps to next line via flex-wrap)
     if (part.notes) {
         const note = document.createElement('div');
         note.className = 'print-note';
@@ -108,31 +112,24 @@ function buildPartRow(part) {
     return li;
 }
 
-/** Build the download URL for a part (same logic as downloadManager). */
-function stlUrl(part) {
-    if (part.externalUrl) return part.externalUrl;
-    if (!part.stlPath) return null;
-    const encoded = part.stlPath
-        .split('/')
-        .map(seg => encodeURIComponent(seg))
-        .join('/');
-    return partsManifest.stlBaseUrl + encoded;
-}
 
-function stlFilename(part) {
-    const raw = part.externalUrl || part.stlPath || '';
-    return decodeURIComponent(raw.split('/').pop());
+
+function fileExtLabel(part) {
+    const name = stlFilename(part).toLowerCase();
+    if (name.endsWith('.3mf')) return '3MF';
+    if (name.endsWith('.step') || name.endsWith('.stp')) return 'STEP';
+    return 'STL';
 }
 
 /** Colour dot legend matching filament prefix conventions. */
 function colorDot(category) {
     const map = {
-        main:        '<span class="color-dot dot-main" title="Main colour"></span>',
-        default:     '<span class="color-dot dot-main" title="Main colour"></span>',
-        accent:      '<span class="color-dot dot-accent" title="Accent colour"></span>',
-        translucent: '<span class="color-dot dot-translucent" title="Translucent"></span>',
-        tpu:         '<span class="color-dot dot-tpu" title="TPU"></span>',
-        spiralVase:  '<span class="color-dot dot-main" title="Spiral-vase mode"></span>',
+        main:        '<span class="color-dot dot-main" title="Main colour" aria-label="Main colour"></span>',
+        default:     '<span class="color-dot dot-main" title="Main colour" aria-label="Main colour"></span>',
+        accent:      '<span class="color-dot dot-accent" title="Accent colour" aria-label="Accent colour"></span>',
+        translucent: '<span class="color-dot dot-translucent" title="Translucent" aria-label="Translucent"></span>',
+        tpu:         '<span class="color-dot dot-tpu" title="TPU" aria-label="TPU"></span>',
+        spiralVase:  '<span class="color-dot dot-main" title="Spiral-vase mode" aria-label="Spiral-vase mode"></span>',
     };
     return map[category] || map.default;
 }

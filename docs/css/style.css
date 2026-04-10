@@ -37,7 +37,7 @@ body {
     background-color: var(--bg-primary);
     color: var(--text-primary);
     line-height: 1.6;
-    overflow: hidden;
+    overflow-x: hidden;
     overflow-y: auto;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -127,7 +127,9 @@ body {
 
 .manifest-panel {
     flex: 1;
-    background: var(--bg-primary);
+    background: var(--bg-primary)
+                url('../images/EMU_watermark.svg')
+                no-repeat top 2rem right -350px / 1600px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -150,6 +152,8 @@ body {
     margin-bottom: 1rem;
     padding-bottom: 0.5rem;
     border-bottom: 1px solid var(--border-color);
+    background: var(--bg-primary);
+    position: relative;
 }
 
 /* ── Config sections ────────────────────────────────────────────── */
@@ -373,20 +377,26 @@ body {
 
 /* ── Print list ─────────────────────────────────────────────────── */
 
-.parts-list {
-    list-style: none;
-    font-size: 0.8rem;
-}
-
+/* ── Category headers ─────────────────────────────────────────── */
 .part-category-header {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
     padding: 0.5rem 0 0.2rem;
     border-bottom: 1px solid var(--border-color);
     margin-top: 0.75rem;
 }
 .part-category-header:first-child { margin-top: 0; }
-.part-category-header .part-name {
-    color: var(--text-primary);
-    font-weight: 600;
+
+/* ── Parts list (flex, capped width) ──────────────────────────── */
+.parts-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.8rem;
+    max-width: 800px;
+    background: var(--bg-primary);
+    position: relative;
 }
 
 .part-file-entry {
@@ -403,14 +413,15 @@ body {
 .part-file-entry:nth-child(even) {
     background: rgba(255, 255, 255, 0.05);
 }
+
 .part-file {
     flex: 1;
+    min-width: 0;
     color: var(--text-secondary);
     font-size: 0.75rem;
     display: flex;
     flex-direction: column;
     gap: 0.15rem;
-    min-width: 0;
 }
 .part-file .part-name-row {
     display: flex;
@@ -427,17 +438,17 @@ body {
     white-space: nowrap;
 }
 .part-qty {
+    width: 5rem;
+    text-align: right;
     color: var(--text-muted);
     font-size: 0.7rem;
     white-space: nowrap;
-    width: 5rem;
-    text-align: right;
 }
 .part-stl-link {
     width: 3.5rem;
     text-align: right;
-    font-size: 0.7rem;
     flex-shrink: 0;
+    font-size: 0.7rem;
 }
 .part-stl-link a {
     color: var(--accent);
@@ -474,6 +485,8 @@ body {
     margin-top: 1rem;
     padding-top: 0.75rem;
     border-top: 1px solid var(--border-color);
+    background: var(--bg-primary);
+    position: relative;
 }
 .print-profiles-section h4 {
     font-size: 0.8rem;
