@@ -17,8 +17,8 @@
 
     /* Text */
     --text-primary:   #f0f3f6;
-    --text-secondary: #9aa5b1;
-    --text-muted:     #6b7785;
+    --text-secondary: #c4cad2;
+    --text-muted:     #a0a8b2;
 
     /* Borders */
     --border-color: #2d333b;
@@ -393,7 +393,7 @@ body {
     list-style: none;
     padding: 0;
     margin: 0;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     max-width: 800px;
     background: var(--bg-primary);
     position: relative;
@@ -418,7 +418,7 @@ body {
     flex: 1;
     min-width: 0;
     color: var(--text-secondary);
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     display: flex;
     flex-direction: column;
     gap: 0.15rem;
@@ -430,7 +430,7 @@ body {
 }
 .part-filename {
     color: var(--text-muted);
-    font-size: 0.65rem;
+    font-size: 0.7rem;
     font-family: monospace;
     padding-left: 1rem;
     overflow: hidden;
@@ -441,14 +441,14 @@ body {
     width: 5rem;
     text-align: right;
     color: var(--text-muted);
-    font-size: 0.7rem;
+    font-size: 0.85rem;
     white-space: nowrap;
 }
 .part-stl-link {
     width: 3.5rem;
     text-align: right;
     flex-shrink: 0;
-    font-size: 0.7rem;
+    font-size: 0.85rem;
 }
 .part-stl-link a {
     color: var(--accent);
@@ -462,7 +462,7 @@ body {
 .print-note {
     width: 100%;
     color: var(--accent-light);
-    font-size: 0.65rem;
+    font-size: 0.7rem;
     font-style: italic;
     padding-left: 1rem;
 }
@@ -498,19 +498,19 @@ body {
     margin-bottom: 0.75rem;
 }
 .print-profile strong {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     color: var(--text-primary);
 }
 .print-profile-settings {
-    font-size: 0.65rem;
-    color: var(--text-muted);
+    font-size: 0.7rem;
+    color: var(--text-secondary);
     margin-top: 0.15rem;
     line-height: 1.5;
 }
 .print-profile-notes {
     list-style: disc;
     margin: 0.25rem 0 0 1.25rem;
-    font-size: 0.65rem;
+    font-size: 0.7rem;
     color: var(--text-secondary);
 }
 .print-profile-notes li {
