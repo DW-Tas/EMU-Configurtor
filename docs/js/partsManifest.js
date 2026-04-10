@@ -199,6 +199,7 @@ export const partsManifest = {
             id: "button",
             label: "Eject Button",
             options: ["buttonStyle", "diffuserThickness"],
+            subHeaders: { diffuserThickness: "LED PCB Thickness" },
         },
         {
             id: "filamentalist-options",
@@ -320,12 +321,12 @@ export const partsManifest = {
             ],
         },
         diffuserThickness: {
-            label: "Diffuser Thickness",
+            label: "LED PCB Thickness",
             type: "radio",
             default: "standard",
             options: [
                 { value: "standard", label: "Standard" },
-                { value: "thicker",  label: "Thicker (for PCB)" },
+                { value: "thicker",  label: "Thicker PCB" },
             ],
         },
 
@@ -580,6 +581,7 @@ export const partsManifest = {
             qty: { multiply: "laneCount" },
             colorCategory: "default",
             printProfile: "base",
+            requires: { buttonStyle: "standard" },
             excludeIf: { pcbMultiLed: true },
         },
 
