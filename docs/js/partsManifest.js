@@ -18,7 +18,7 @@
  *   4. Set colorCategory and printProfile
  *
  * COLOR CATEGORIES (match filament prefix conventions):
- *   "main"        — main color (no prefix or [m] prefix)
+ *   "multi"        — main color (no prefix)
  *   "accent"      — accent color ([a] prefix)
  *   "translucent" — translucent ([t] prefix)
  *   "tpu"         — TPU material ([TPU] prefix)
@@ -478,7 +478,7 @@ export const partsManifest = {
         "cable-entry-outside-ioboard": {
             name: "Cable Entry — I/O Board Outside (Entry Side)",
             category: "Base",
-            externalUrl: "https://raw.githubusercontent.com/kashine6/EMU-IO-Board/main/STLS/%5Bm%5D_Cable%20Entry%20-%20IO%20Board%20OutSide.stl",
+            externalUrl: "https://raw.githubusercontent.com/kashine6/EMU-IO-Board/main/STLS/%5Bmm%5D_Cable%20Entry%20-%20IO%20Board%20OutSide.stl",
             qty: 1,
             colorCategory: "main",
             printProfile: "base",
