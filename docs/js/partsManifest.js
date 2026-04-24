@@ -955,7 +955,7 @@ export const partsManifest = {
             name: "Desiccant Box Funnel",
             category: "Desiccant Box",
             stlPath: "Desiccant-box/[spiral_vase]Desiccant_Box_Funnel.stl",
-            qty: { multiply: "laneCount" },
+            qty: 1,
             colorCategory: "default",
             printProfile: "spiralVase",
         },
